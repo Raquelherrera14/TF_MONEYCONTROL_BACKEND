@@ -31,6 +31,9 @@ public interface PrestamoRepository extends JpaRepository<Prestamo,Long> {
             "p.fechaFin, p.estado) FROM Prestamo p JOIN p.usuario u WHERE p.fechaInicio BETWEEN :fechaInicio AND :fechaFin")
     public List<PrestamoPeriodoDTO> listarPrestamosPorPeriodo(@Param("fechaInicio") LocalDate fechaInicio, @Param("fechaFin") LocalDate fechaFin);
 
-    @Query("select new com.upc.tf_moneycontrol.dto.EstadisticasPrestamoDTO(AVG(p.monto), SUM(p.monto), COUNT(p)) FROM Prestamo p")
+    @Query("select new com.upc.tf_moneycontrol.dto.EstadisticasPrestamoDTO(AVG(p.monto), SUM(p.monto), COUNT(p.idPrestamo)) FROM Prestamo p")
     public List<EstadisticasPrestamoDTO> calcularEstadisticasPrestamos();
+
+
+
 }
